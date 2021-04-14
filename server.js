@@ -126,8 +126,8 @@ function detailsHandler(req,res)
   client.query(SQL,safeValue)
     .then(result=>{
       console.log(result.rows);
-      // res.render('pages/books/detail',{bookDetail:result.rows[0]});
-      res.send(result.rows[0]);
+      res.render('pages/books/detail',{bookDetail:result.rows[0]});
+      // res.send(result.rows[0]);
     });
 }
 
