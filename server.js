@@ -79,7 +79,7 @@ function showRoutHandler (req,res){
         return new Book (item); });
 
       // res.send(bookObjArr);// for testing
-
+// res.send(fullBookData.body.items);
       res.render('pages/searches/show',{renderBookData:bookObjArr} );
     }).catch(()=>{
       //NOTE:: ----------------
@@ -103,9 +103,9 @@ function homeRoutHandler (req,res) {
   client.query(SQL)
     .then (shelfData=>{
 
-      // let bookCount = shelfData.rows.length;
+      let bookCount = shelfData.rows.length;
       // res.send(shelfData.rows);
-      res.render('pages/index',{books: shelfData.rows});
+      res.render('pages/index',{books: shelfData.rows, count:bookCount});
     })
     .catch(err=>{
       res.send(err);
@@ -155,10 +155,11 @@ function Book (oneBook)
   //if there's issues with api data --> give this data insttead
 
   this.title = oneBook.volumeInfo.title ? oneBook.volumeInfo.title : 'Unkonown',
-  this.authors = oneBook.volumeInfo.authors? oneBook.volumeInfo.authors : 'Unkonown', // array
+  this.author = oneBook.volumeInfo.authors? oneBook.volumeInfo.authors : 'Unkonown', // array
   this.description = oneBook.volumeInfo.description ? oneBook.volumeInfo.description : 'Unkonown' ,
   this.imgUrl = oneBook.volumeInfo.imageLinks? oneBook.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
-
+  // this.isbn= oneBook.volumeInfo.sendindustryIdentifiers[0].identifier? oneBook.volumeInfo.sendindustryIdentifiers[0].identifier : 'Unkonown';
+  // console.log( this.isbn);
   //NOTE:: ----------------
   // terminal : Cannot read property 'thumbnail' of undefined
   // if oneBook.volumeInfo.imageLinks --> undefined
