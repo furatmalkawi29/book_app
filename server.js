@@ -4,7 +4,7 @@
 require('dotenv').config();
 const express = require('express');
 const superagent = require('superagent');
-
+const pg = require('pg');
 
 // Application Setups
 const PORT = process.env.PORT || 3030;
@@ -17,11 +17,18 @@ server.set('view engine','ejs'); // npm i ejs //----------lab01
 // node.js middleware ,to take data from Form Data to request body
 server.use(express.urlencoded({extended:true})); //----------lab01
 
+
+// Database Setup
+const client = new pg.Client(process.env.DATABASE_URL);
+
+
 //routs ---------------------------------
 server.get('/hello', testHandler);
 server.get('/', homeRoutHandler);
 server.get('/searches/new', newRoutHandler);
 server.post('/searches', showRoutHandler);
+server.get('/books/:id', detailsHandler);
+server.post('/books', addBookHandler);
 server.get('*', noRoutHandler);
 
 //functions -------------------------------
@@ -89,10 +96,57 @@ function testHandler (req,res){
 //-----------------------
 
 function homeRoutHandler (req,res) {
-  // res.send('home route');
-  res.render('pages/index');
+
+  //in book.sql lAT PROPERTY IN TABLE shoudnt have comma (,)
+
+  let SQL = `SELECT * FROM bookshelf;`;
+  client.query(SQL)
+    .then (shelfData=>{
+
+      // let bookCount = shelfData.rows.length;
+      // res.send(shelfData.rows);
+      res.render('pages/index',{books: shelfData.rows});
+    })
+    .catch(err=>{
+      res.send(err);
+    });
+  // res.render('pages/index');
+
 }
 
+
+//----------------------------------
+
+function detailsHandler(req,res)
+{
+  console.log('params');
+  console.log(req.params);
+  let SQL = `SELECT * FROM bookshelf WHERE id=$1;`;
+  let safeValue = [req.params.id];
+  client.query(SQL,safeValue)
+    .then(result=>{
+      console.log(result.rows);
+      // res.render('pages/books/detail',{bookDetail:result.rows[0]});
+      res.send(result.rows[0]);
+    });
+}
+
+
+//-------------------------
+function addBookHandler (req,res)
+{
+  console.log(req.body);
+  let {author,title,isbn,image_url,description} = req.body;
+  let SQL = `INSERT INTO bookshelf (author,title,isbn,image_url,description) VALUES ($1,$2,$3,$4,$5) RETURNING *;`;
+  // let safeValues = [req.body.title,req.body.description,req.body.contact,req.body.status,req.body.category];
+  let safeValues = [author,title,isbn,image_url,description];
+  client.query(SQL,safeValues)
+    .then(result=>{
+      console.log(result.rows);
+      // res.send(result.rows);
+      res.redirect(`/books/${result.rows[0].id}`);
+    });
+}
 // constructor----------------------------
 
 function Book (oneBook)
@@ -118,6 +172,11 @@ function noRoutHandler (req,res){
 
 
 
-server.listen(PORT,()=>{
-  console.log(`Listening on PORT ${PORT}`);
-});
+client.connect() //--------------------lab03
+  .then(() => {
+    server.listen(PORT, () =>
+      console.log(`listening on ${PORT}`));
+
+  }).catch(error=>{
+    console.log(error);
+  });
