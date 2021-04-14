@@ -4,11 +4,80 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="styles/reset.css"> -->
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Document</title>
 </head>
 <body>
-  <h1>Book App | Home Page</h1>
-  <a href="/">Home</a>
+
+  <header>
+    <div>
+      <h1>Best Books!</h1>
+  <i class="fa fa-bars"></i>
+    </div>
+  </header>
+
+
+
+
+
+
+  <main>
+    <h1>Search Results</h1>
+    
+    <a href="/">Home</a>
   <a href="/searches/new">search the Google Books API</a>
+
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="styles/reset.css"> -->
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+  <title>Document</title>
+</head>
+<body>
+  <h1>Api Books List</h1>
+  
+  <main>
+  <section class="bookContain">
+          <!--renderBookData = [{}, {}, {},...]-->
+    <% books.forEach((item,index)=>{ %> 
+        <img src="<%= item.imgUrl %>">
+        <% console.log( item.title)%>
+        <p><%= item.title %></p>
+        <p><%= item.author %></p>
+        <p><%= item.description %></p>
+        <!-- <p><a href="/books/<%=index+1%>">View Details</a></p>  -->
+        <!-- <form action="/books" method="POST">
+          <input type="hidden" name="title" value="<%= item.title %>">
+          <input type="hidden" name="author" value="<%= item.author %>">
+          <input type="hidden" name="description" value="<%= item.description %>">
+          <input type="hidden" name="image_url" value="<%= item.imgUrl%>">
+          <button>Add To My Bookshelf</button>
+          </form> -->
+    <% })%>
+  </section>
+</main>
+
+
+
+
+
+<footer>
+  <div>
+  <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+<a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+<a href="#" class="google"><i class="fa fa-google"></i></a>
+<a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+<div>
+</footer>
+
 </body>
 </html>

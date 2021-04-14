@@ -16,22 +16,16 @@
   <main>
   <section class="bookContain">
           <!--renderBookData = [{}, {}, {},...]-->
-    <% renderBookData.forEach((item,index)=>{%> 
       <div>
-        <img src="<%= item.imgUrl %>">
-        <p><%= item.title %></p>
-        <p><%= item.author %></p>
-        <p><%= item.description %></p>
-        <!-- <p><a href="/books/<%=index+1%>">View Details</a></p>  -->
+        <img src="<%= bookDetail.image_url %>">
+        <p><%= bookDetail.title %></p>
+        <p><%= bookDetail.author %></p>
+        <p><%= bookDetail.description %></p>
+        <p><a href="/books/:<%=bookDetail.id %>">View Details</a></p> 
         <form action="/books" method="POST">
-          <input type="hidden" name="title" value="<%= item.title %>">
-          <input type="hidden" name="author" value="<%= item.author %>">
-          <input type="hidden" name="description" value="<%= item.description %>">
-          <input type="hidden" name="image_url" value="<%= item.imgUrl%>">
           <button>Add To My Bookshelf</button>
           </form>
         </div>
-    <% }) %>
   </section>
   </main>
 </body>
