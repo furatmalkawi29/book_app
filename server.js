@@ -57,17 +57,10 @@ function showRoutHandler (req,res){
   // q=inauthor:james
 
   let searchTerm = req.body.book;
-  let bookAuthorURL;
+  let choice = req.body.choice;
   // console.log(req.body);
-
-  if (req.body.title === 'on')
-  {
-    bookAuthorURL = `https://www.googleapis.com/books/v1/volumes?q=intitle:${searchTerm}`;
-  } else if (req.body.author === 'on')
-  {
-    bookAuthorURL = `https://www.googleapis.com/books/v1/volumes?q=inauthor:${searchTerm}`;
-  }
-
+  let bookAuthorURL = `https://www.googleapis.com/books/v1/volumes?q=${choice}:${searchTerm}`;
+  
   superagent.get(bookAuthorURL)
     .then(fullBookData => {
 
