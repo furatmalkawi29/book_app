@@ -13,19 +13,21 @@
 <body>
 
   <header>
-    <div>
-      <h1>Best Books!</h1>
+  <h1>Best Books!<h1>
   <i class="fa fa-bars"></i>
-    </div>
   </header>
 
+
   <main>
-    <h1>Search Results</h1>
+    <nav>
+      <div>
+      <a href="/">Home</a>
+      <a href="/searches/new">search the Google Books API</a>
+    </div>
+    </nav>
+    <h2> <p><%= count%></p> Saved Books</h2>
     
-    <a href="/">Home</a>
-  <a href="/searches/new">search the Google Books API</a>
-<br><br>
-<p> Your Bookshelf has (<%= count%>) Books </p>
+
 
   <section class="bookContain">
           <!--renderBookData = [{}, {}, {},...]-->
@@ -39,7 +41,7 @@
           <input type="hidden" name="author" value="<%= item.author %>">
           <input type="hidden" name="description" value="<%= item.description %>">
           <input type="hidden" name="image_url" value="<%= item.image_url%>">
-          <button>View Details</button>
+          <button class="homeBtn">View Details</button>
           </form>
           </div>
     <% })%>
@@ -56,5 +58,7 @@
 <div>
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/app.js"></script>
 </body>
 </html>

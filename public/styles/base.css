@@ -11,30 +11,74 @@ body {
 }
 
 
-header div {
+
+
+header {
   display: flex;
-  /* grid-template-columns: max-content max-content; */
-    color: white;
   justify-content: space-between;
+  align-content: center;
+
+  padding: 0% 1.5%;
+  padding-top: 2.5%;
   height: 50px ;
-  line-height: 50px;
+
   background-color: rgb(15, 15, 15);
+  color: white;
+  font-size: x-large;
 }
 
-main h1:first-child {
+
+
+
+main h2 {
   color: white;
-  background-color: cornflowerblue;
+  background-color: rgb(68, 68, 68);
   height: 50px ;
   text-align: center;
   line-height: 50px;
-  margin-bottom: 20%;
+  margin-bottom: 5%;
 
 }
 
+main h2 p {
+  display: inline;
+  padding: 0.5%;
+  color: #000000;
+  background-color: white;
+  border-radius: 10px 10px;
+}
+
+
+
+nav {
+  position: relative;
+}
+
+nav div{
+  position: absolute;
+  top: 0px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 8em;
+  width: 100%;
+  background-color: rgb(8, 8, 6 , .8);
+}
+
+nav a {text-decoration: none;
+color: #ffffff;
+padding: 1em;
+font-size: large;}
+
+
+
+
+
+
 main .bookContain {
-  /* display: grid;
-  grid-template-columns: 90%;
-  grid-row-gap: 5%; */
 
   display: flex;
 flex-direction: column;
@@ -43,13 +87,13 @@ align-content: center;
 }
 
 main {
-  margin-bottom: 30%;
+  margin-bottom: 10%;
 }
 
  main section div {
 padding: 10%;
 margin: 10%;
-background-color: rgb(248, 201, 246);
+background-color: rgb(216, 216, 216);
 box-shadow:  5px 6px 20px 0px #000000;
 
 
@@ -72,8 +116,14 @@ div p {
   margin: 3% 0%;
 }
 
+
+
+
+
+/*buttons-----------------*/
+
 button {
-    box-shadow:inset 0px 1px 3px 0px #8f8f8f;
+    box-shadow: 0px 1px 3px 0px #8f8f8f;
     background-color:#161616;
     border-radius:3px;
     display:inline-block;
@@ -86,11 +136,107 @@ button {
     text-shadow:0px -1px 0px #555756;
 }
 
+.homeBtn {
+  width:60%;
+}
 
+.showBtn
+{
+  width: 100%;
+}
+
+.detailBtn
+{
+  display: flex;
+  justify-content: space-between;
+}
+
+.detailBtn button {
+  width :10em;
+  padding: 1em;
+  border-radius: 1em;
+  color: #000000;
+  background-color: #555756;
+  font-weight: bolder;
+}
+
+
+/*form ----------------*/
+.newForm
+{ width: 80%;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.newForm input,.newForm button,.newForm label {
+  width: 100%;
+  padding: 1em;
+
+  border: none;
+  border-radius: .5em;
+}
+
+.newForm div {
+  display: flex;
+  align-items: baseline;
+
+  width: 100%;
+  border-radius: .5em;
+  margin: 1em;
+
+  background-color: #cccbcb;
+}
+
+
+#updateForm {
+width: 90%;
+height: 80vh;
+margin: auto;
+
+background-color: #c7c2c2; 
+}
+
+#updateForm form {
+  padding: 1em;
+margin: 2em 0em;
+}
+
+#updateForm form * {
+  width: 100%;
+  padding: 1em;
+  margin-top: 1em;
+  border: none;
+  border-radius: .5em;
+}
+
+
+/*random ------------------*/
+
+.detailDes
+{
+  background-color: rgb(240, 234, 234);
+  border-radius: .5em;
+  padding: 2em;
+}
+
+
+
+
+/*footer --------------*/
 
 footer a {
 margin: 10%;
 }
+
+footer i {
+color: #ffffff;
+}
+
 footer div {
 margin-top: 2%;
 }
@@ -98,7 +244,7 @@ margin-top: 2%;
 footer {
  position: fixed;
   bottom: 0;
-width:100%;
+  width:100%;
   height: 35px ;
   background-color: rgb(15, 15, 15);
 }
