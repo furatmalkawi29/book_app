@@ -79,7 +79,7 @@ function showRoutHandler (req,res){
         return new Book (item); });
 
       // res.send(bookObjArr);// for testing
-// res.send(fullBookData.body.items);
+      // res.send(fullBookData.body.items);
       res.render('pages/searches/show',{renderBookData:bookObjArr} );
     }).catch(()=>{
       //NOTE:: ----------------
@@ -158,8 +158,14 @@ function Book (oneBook)
   this.author = oneBook.volumeInfo.authors? oneBook.volumeInfo.authors : 'Unkonown', // array
   this.description = oneBook.volumeInfo.description ? oneBook.volumeInfo.description : 'Unkonown' ,
   this.imgUrl = oneBook.volumeInfo.imageLinks? oneBook.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
-  // this.isbn= oneBook.volumeInfo.sendindustryIdentifiers[0].identifier? oneBook.volumeInfo.sendindustryIdentifiers[0].identifier : 'Unkonown';
-  // console.log( this.isbn);
+
+  //-----------------ISBN :
+  let regEx = /ISBN/g;
+
+  this.isbn= regEx.test(oneBook.volumeInfo.industryIdentifiers[0].type)? oneBook.volumeInfo.industryIdentifiers[0].identifier : 'unknown';
+
+  console.log(this.isbn);
+
   //NOTE:: ----------------
   // terminal : Cannot read property 'thumbnail' of undefined
   // if oneBook.volumeInfo.imageLinks --> undefined
