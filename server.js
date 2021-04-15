@@ -94,9 +94,9 @@ function Book (oneBook)
   //NOTE:: ----------------
   //if there's issues with api data --> give this data insttead
 
-  this.title = oneBook.volumeInfo.title ? oneBook.volumeInfo.title : 'Unkonown',
-  this.authors = oneBook.volumeInfo.authors? oneBook.volumeInfo.authors : 'Unkonown', // array
-  this.description = oneBook.volumeInfo.description ? oneBook.volumeInfo.description : 'Unkonown' ,
+  this.title = oneBook.volumeInfo.title? oneBook.volumeInfo.title : 'Unkonown',
+  this.author = oneBook.volumeInfo.authors? oneBook.volumeInfo.authors : 'Unkonown', // array
+  this.description = oneBook.volumeInfo.description? oneBook.volumeInfo.description : 'Unkonown' ,
   this.imgUrl = oneBook.volumeInfo.imageLinks? oneBook.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
 
   //NOTE:: ----------------
@@ -109,7 +109,6 @@ function Book (oneBook)
 function noRoutHandler (req,res){
   res.send('not found rout');
 }
-
 
 
 server.listen(PORT,()=>{
