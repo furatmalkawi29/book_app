@@ -6,40 +6,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/styles/reset.css">
   <link rel="stylesheet" href="/styles/base.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Document</title>
 </head>
 
-
 <body>
   <header>
-    <div>
-      <h1>Best Books!</h1>
-      <i class="fa fa-bars"></i>
-    </div>
+    <h1>Best Books!<h1>
+    <i class="fa fa-bars"></i>
   </header>
 
+
   <main>
-      <nav>
-        <div>
-        <a href="/">Home</a>
-        <a href="/searches/new">search the Google Books API</a>
-       </div>
-      </nav>
-            
-    
+    <nav>
+      <div>
+      <a href="/">Home</a>
+      <a href="/searches/new">search the Google Books API</a>
+    </div>
+    </nav>
+
   <section class="bookContain">
-          <!--renderBookData = [{}, {}, {},...]-->
+      <!--renderBookData = [{}, {}, {},...]-->
       <div>
         <img src="<%= bookDetail.image_url %>">
         <p><%= bookDetail.title %></p>
         <p><%= bookDetail.author %></p>
-        <p><%= bookDetail.description %></p>
-        <p><%= bookDetail.description %></p>
+        <p class="detailDes"><%= bookDetail.description %></p>
         <p>IISBN: <%= bookDetail.isbn %></p>
+
+        <section class="detailBtn">
+        <form action="/deleteBook/<%=bookDetail.id%>?_method=delete" method="post">
+          <button>Delete Book</button>
+          </form>
+          <button id='updateBtn'>Update</button>
+        <section>
+
         </div>
+    </section>
+
+
+
+    
+    <section id='updateForm'>
+    <form action="/updateBook/<%=bookDetail.id%>?_method=put" method="post">
+     <input type="text" name="title" placeholder="Populated title"  value=' <%= bookDetail.title  %> '>
+     <br>
+     <input type="text" name="author" placeholder="Populated author" value="<%= bookDetail.author  %>">
+     <br>
+     <input type="text" name="image_url" placeholder="Populated image url"value="<%= bookDetail.image_url %>">
+     <br>
+     <input type="text" name="isbn" placeholder="Populated ISBN" value="<%= bookDetail.isbn  %>">
+     <br>
+     <textarea name="description" placeholder="Populated description" cols="30" rows="6"><%= bookDetail.description %></textarea>
+     <br>
+     <button type="submit">Update Book</button>
+  </form>
   </section>
+
   </main>
+
+
 
   <footer>
     <div>
@@ -49,9 +75,8 @@
   <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
   <div>
   </footer>
-
-
+  
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/js/app.js"></script>
+  <script src="/js/app.js"></script>
 </body>
 </html>

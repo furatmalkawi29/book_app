@@ -5,6 +5,8 @@ require('dotenv').config();
 const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
+const methodOverride = require('method-override'); //-----------------middleware
+// npm i method-override //------- Note: always install when require , before use();
 
 // Application Setups
 const PORT = process.env.PORT || 3030;
@@ -17,6 +19,8 @@ server.set('view engine','ejs'); // npm i ejs //----------lab01
 // node.js middleware ,to take data from Form Data to request body
 server.use(express.urlencoded({extended:true})); //----------lab01
 
+// we can change name from _method to anything : _method33343
+server.use(methodOverride('_method')); //-----------------middleware
 
 // Database Setup
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -29,6 +33,8 @@ server.get('/searches/new', newRoutHandler);
 server.post('/searches', showRoutHandler);
 server.get('/books/:id', detailsHandler);
 server.post('/books', addBookHandler);
+server.delete('/deleteBook/:id', deleteBookHandler);
+server.put('/updateBook/:id', updateBookHandler);
 server.get('*', noRoutHandler);
 
 //functions -------------------------------
@@ -43,6 +49,28 @@ function newRoutHandler (req,res) {
 
 //----------------------------
 
+function deleteBookHandler (req,res)
+{
+  let SQL = `DELETE FROM bookshelf WHERE id=$1;`;
+  let value = [req.params.id];
+  client.query(SQL,value)
+    .then(res.redirect('/'));
+}
+
+//-------------------
+
+function updateBookHandler (req,res)
+{
+  let {author,title,isbn,image_url,description} = req.body;
+  let SQL = `UPDATE bookshelf SET author=$1,title=$2,isbn=$3,image_url=$4,description=$5 WHERE id=$6;`;
+  let safeValues = [author,title,isbn,image_url,description,req.params.id];
+  client.query(SQL,safeValues)
+    .then(()=>{
+      res.redirect(`/books/${req.params.id}`);
+    });
+}
+
+//--------------------------
 //form page to --> render page
 function showRoutHandler (req,res){
   // https://www.googleapis.com/books/v1/volumes?q=cat
@@ -60,7 +88,7 @@ function showRoutHandler (req,res){
   let choice = req.body.choice;
   // console.log(req.body);
   let bookAuthorURL = `https://www.googleapis.com/books/v1/volumes?q=${choice}:${searchTerm}`;
-  
+
   superagent.get(bookAuthorURL)
     .then(fullBookData => {
 
