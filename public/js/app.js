@@ -1,6 +1,7 @@
 
-$('#updateForm').hide();
+//header -------------------
 
-$('#updateBtn').on('click',function(){
-  $('#updateForm').toggle();
-});
+$('nav').hide();
+
+$('header i').on('click',function(){
+  $('nav').toggle();
