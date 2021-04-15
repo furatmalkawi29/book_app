@@ -23,8 +23,11 @@ server.use(express.urlencoded({extended:true})); //----------lab01
 server.use(methodOverride('_method')); //-----------------middleware
 
 // Database Setup
-const client = new pg.Client( {
-  connectionString: process.env.DATABASE_URL,ssl: {rejectUnauthorized : false}});
+// to run locally:
+// const client = new pg.Client(process.env.DATABASE_URL); //-------------lab03
+
+//to run on herokuu:
+const client = new pg.Client( { connectionString: process.env.DATABASE_URL, ssl: {rejectUnauthorized: false}}); 
 
 
 //routs ---------------------------------
